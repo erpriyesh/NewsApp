@@ -1,4 +1,4 @@
-package com.priyesh.newsappmvvm.ui.news.domain.model
+package com.priyesh.newsappmvvm.ui.news.model
 
 import kotlinx.serialization.Serializable
 

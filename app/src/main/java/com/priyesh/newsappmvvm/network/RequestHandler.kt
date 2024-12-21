@@ -11,9 +11,8 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.appendPathSegments
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class RequestHandler @Inject constructor(val httpClient: HttpClient, val dispatcher: DispatcherProvider) {
+class RequestHandler(val httpClient: HttpClient, val dispatcher: DispatcherProvider) {
 
     suspend inline fun <reified B, reified R> executeRequest(
         httpMethod: HttpMethod,
