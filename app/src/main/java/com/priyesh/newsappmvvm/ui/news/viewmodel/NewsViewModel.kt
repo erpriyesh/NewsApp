@@ -9,8 +9,9 @@ import com.priyesh.newsappmvvm.network.NetworkResult
 import com.priyesh.newsappmvvm.ui.news.repository.NewsRepository
 import com.priyesh.newsappmvvm.ui.news.view.NewsUIState
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsViewModel(private val newsRepository: NewsRepository): ViewModel() {
+class NewsViewModel @Inject constructor(private val newsRepository: NewsRepository): ViewModel() {
 
     private var _newsUIState = MutableLiveData<NewsUIState>(NewsUIState.Loading)
     val newsUIState: LiveData<NewsUIState>
@@ -34,7 +35,7 @@ class NewsViewModel(private val newsRepository: NewsRepository): ViewModel() {
     }
 }
 
-class NewsViewModelFactory(private val newsRepository: NewsRepository): ViewModelProvider.Factory {
+class NewsViewModelFactory @Inject constructor(private val newsRepository: NewsRepository): ViewModelProvider.Factory {
     @SuppressWarnings("kotlin:S6530")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(NewsViewModel::class.java)) {

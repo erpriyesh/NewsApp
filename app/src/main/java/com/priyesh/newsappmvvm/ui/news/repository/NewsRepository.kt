@@ -5,8 +5,9 @@ import com.priyesh.newsappmvvm.network.NetworkResult
 import com.priyesh.newsappmvvm.network.RequestHandler
 import com.priyesh.newsappmvvm.network.Response
 import com.priyesh.newsappmvvm.ui.news.model.Article
+import javax.inject.Inject
 
-class NewsRepository(private val requestHandler: RequestHandler) {
+class NewsRepository @Inject constructor(private val requestHandler: RequestHandler) {
     suspend fun getTopHeadlines(country: String, page: Int = 1): NetworkResult<Response<Article>>{
         return requestHandler.get(
             urlPathSegments = listOf("v2", "top-headlines"),
