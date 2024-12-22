@@ -15,6 +15,7 @@ dataStore = "1.1.1"
 dagger = "2.52"
 room = "2.6.1"
 navigation = "2.8.5"
+daggerHilt = "2.51.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -40,6 +41,9 @@ coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutin
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
+
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
@@ -53,6 +57,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
 
 [bundles]
 network = ["ktor-client-core", "ktor-client-cio", "ktor-client-logging", "ktor-client-content-negotiation", "ktor-serialization-json", "kotlin-serialization-json", "ktor-client-auth"]

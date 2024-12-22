@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -42,6 +43,10 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -54,8 +59,8 @@ dependencies {
     implementation(libs.bundles.network)
     implementation(libs.bundles.room)
     ksp(libs.room.compiler)
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

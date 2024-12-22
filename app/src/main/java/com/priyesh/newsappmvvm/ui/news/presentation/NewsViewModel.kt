@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.priyesh.newsappmvvm.network.NetworkResult
 import com.priyesh.newsappmvvm.ui.news.domain.model.Article
 import com.priyesh.newsappmvvm.ui.news.domain.usecase.GetNewsUsecase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class NewsViewModel @Inject constructor(private val newsUsecase: GetNewsUsecase) : ViewModel() {
     private val _news = MutableLiveData<List<Article>>()
     val news: LiveData<List<Article>> = _news
