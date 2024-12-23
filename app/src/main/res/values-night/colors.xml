@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="status_bar_color">#242424</color>
+    <color name="background_color">#303030</color>
+    <color name="titleTextColor">#FFFFFF</color>
+    <color name="subTitleTextColor">@android:color/darker_gray</color>
+</resources>

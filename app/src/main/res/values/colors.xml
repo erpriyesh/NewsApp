@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="status_bar_color">#b3b8b8</color>
+    <color name="background_color">#eff5f5</color>
+    <color name="titleTextColor">#000000</color>
+    <color name="subTitleTextColor">@android:color/darker_gray</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.priyesh.newsappmvvm.ui.news
+package com.priyesh.newsappmvvm.di
 
 import com.priyesh.newsappmvvm.ui.news.data.repository.NewsRepositoryImpl
 import com.priyesh.newsappmvvm.ui.news.domain.repository.NewsRepository
