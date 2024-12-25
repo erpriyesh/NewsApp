@@ -9,5 +9,6 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        app:navGraph="@navigation/nav_graph"
+        android:background="@color/background_color"/>
 </layout>

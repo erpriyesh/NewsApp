@@ -11,4 +11,6 @@
     <color name="background_color">#eff5f5</color>
     <color name="titleTextColor">#000000</color>
     <color name="subTitleTextColor">@android:color/darker_gray</color>
+    <color name="strokeColorSelected">@android:color/darker_gray</color>
+    <color name="blackTransparent">#99000000</color>
 </resources>

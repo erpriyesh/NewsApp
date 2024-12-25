@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/background_color"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCardView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/newsImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Two lorry drivers killed in A15 crash in Lincolnshire"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@color/titleTextColor"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"/>
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/newsDateTimeSource"
+            app:layout_constraintStart_toStartOf="@+id/newsTitle"
+            app:layout_constraintEnd_toEndOf="@id/newsTitle"
+            tools:text="Priyesh Panchal"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/subTitleTextColor"
+            android:layout_marginBottom="2dp"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/newsDateTimeSource"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/newsTitle"
+            app:layout_constraintEnd_toEndOf="@id/newsTitle"
+            tools:text="Nov 26, 1997 03:27 | bbcnews.com"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/subTitleTextColor"
+            android:layout_marginBottom="4dp"
+            android:maxLines="1"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.priyesh.newsappmvvm.R
 import com.priyesh.newsappmvvm.network.NetworkResult
 import com.priyesh.newsappmvvm.ui.news.domain.model.Article
+import com.priyesh.newsappmvvm.ui.news.domain.model.Category
 import com.priyesh.newsappmvvm.ui.news.domain.usecase.GetNewsUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -31,5 +33,17 @@ class NewsViewModel @Inject constructor(private val newsUsecase: GetNewsUsecase)
                 )
             }
         }
+    }
+
+    fun getCategoryList(): List<Category> {
+        return mutableListOf(
+            Category("All", R.drawable.black_gradient, true),
+            Category("Business", R.drawable.business, false),
+            Category("Entertainment", R.drawable.entertainment, false),
+            Category("Health", R.drawable.health, false),
+            Category("Science", R.drawable.science, false),
+            Category("Sports", R.drawable.sports, false),
+            Category("Technology", R.drawable.technology, false)
+        )
     }
 }
