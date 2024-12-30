@@ -8,5 +8,6 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class GetNewsUsecase @Inject constructor(private val newsRepository: NewsRepository) {
-    suspend operator fun invoke(): NetworkResult<NewsResponse> = newsRepository.getTopHeadlines()
+    suspend operator fun invoke(category: String?): NetworkResult<NewsResponse> =
+        newsRepository.getTopHeadlines(category)
 }

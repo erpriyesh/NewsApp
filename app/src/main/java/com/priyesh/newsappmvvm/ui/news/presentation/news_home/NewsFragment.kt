@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,7 +31,11 @@ class NewsFragment : Fragment() {
     private lateinit var latestNewsAdapter: LatestNewsAdapter
     private lateinit var newsListAdapter: NewsListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false)
         return binding.root
     }
@@ -46,7 +49,8 @@ class NewsFragment : Fragment() {
 
     private fun initView() {
         initRecyclerView()
-        binding.toolbar.subtitle = CommonFunctions.timeMillisToRequiredFormat(System.currentTimeMillis())
+        binding.toolbar.subtitle =
+            CommonFunctions.timeMillisToRequiredFormat(System.currentTimeMillis())
         categoryAdapter.submitList(viewModel.getCategoryList())
     }
 
@@ -75,16 +79,24 @@ class NewsFragment : Fragment() {
         newsListAdapter = NewsListAdapter(::onNewsClick)
 
         val recyclerViewCategory = RecyclerView(requireActivity()).apply {
-            layoutParams = RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT)
-            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            layoutParams = RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            )
+            layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
             setPadding(0, 0, 48, 0)
             clipToPadding = false
         }
 
         val recyclerViewLatestNews = RecyclerView(requireActivity()).apply {
-            layoutParams = RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT)
-            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            layoutParams = RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            )
+            layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
             adapter = latestNewsAdapter
         }
 
@@ -98,12 +110,14 @@ class NewsFragment : Fragment() {
     }
 
     private fun onCategorySelected(category: Category) {
-        Toast.makeText(requireActivity(), category.categoryName, Toast.LENGTH_SHORT).show()
+        viewModel.loadNews(category.category)
     }
 
     private fun onNewsClick(article: Article) {
-        findNavController().navigate(R.id.action_newsFragment_to_newsDetailsFragment, Bundle().apply {
-            putString(Constants.ARTICLE_URL, article.url)
-        })
+        findNavController().navigate(
+            R.id.action_newsFragment_to_newsDetailsFragment,
+            Bundle().apply {
+                putString(Constants.ARTICLE_URL, article.url)
+            })
     }
 }

@@ -9,5 +9,9 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class NewsRepositoryImpl @Inject constructor(private val api: NewsAPI) : NewsRepository {
-    override suspend fun getTopHeadlines(): NetworkResult<NewsResponse> = api.getTopHeadlines()
+    override suspend fun getTopHeadlines(category: String?): NetworkResult<NewsResponse> =
+        api.getTopHeadlines(category)
+
+    override suspend fun searchNews(query: String, page: Int): NetworkResult<NewsResponse> =
+        api.searchNews(query, page)
 }

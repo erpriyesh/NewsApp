@@ -15,11 +15,11 @@
             android:id="@+id/imageCardView"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
             app:cardUseCompatPadding="false"
-            app:cardElevation="0dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/newsImage"
@@ -34,40 +34,40 @@
             android:id="@+id/newsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageCardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Two lorry drivers killed in A15 crash in Lincolnshire"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/titleTextColor"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@color/titleTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Two lorry drivers killed in A15 crash in Lincolnshire" />
 
         <TextView
             android:id="@+id/author"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/newsDateTimeSource"
-            app:layout_constraintStart_toStartOf="@+id/newsTitle"
-            app:layout_constraintEnd_toEndOf="@id/newsTitle"
-            tools:text="Priyesh Panchal"
+            android:layout_marginBottom="2dp"
+            android:maxLines="1"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="@color/subTitleTextColor"
-            android:layout_marginBottom="2dp"
-            android:maxLines="1"/>
+            app:layout_constraintBottom_toTopOf="@+id/newsDateTimeSource"
+            app:layout_constraintEnd_toEndOf="@id/newsTitle"
+            app:layout_constraintStart_toStartOf="@+id/newsTitle"
+            tools:text="Priyesh Panchal" />
 
         <TextView
             android:id="@+id/newsDateTimeSource"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/newsTitle"
-            app:layout_constraintEnd_toEndOf="@id/newsTitle"
-            tools:text="Nov 26, 1997 03:27 | bbcnews.com"
+            android:layout_marginBottom="4dp"
+            android:maxLines="1"
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/subTitleTextColor"
-            android:layout_marginBottom="4dp"
-            android:maxLines="1"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/newsTitle"
+            app:layout_constraintStart_toStartOf="@+id/newsTitle"
+            tools:text="Nov 26, 1997 03:27 | bbcnews.com" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

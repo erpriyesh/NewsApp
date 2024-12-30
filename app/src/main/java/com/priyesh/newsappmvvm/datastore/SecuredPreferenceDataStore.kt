@@ -60,7 +60,7 @@ class SecuredPreferenceDataStore @Inject constructor(@ApplicationContext val con
         context.secureDataStore.edit { it.clear() }
     }
 
-    fun<T> saveDataInDataStore(key: String, value: T) {
+    fun <T> saveDataInDataStore(key: String, value: T) {
         coroutineScope.launch {
             saveData(key, value)
         }

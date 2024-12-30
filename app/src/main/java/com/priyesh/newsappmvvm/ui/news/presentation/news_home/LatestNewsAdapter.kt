@@ -10,7 +10,8 @@ import com.priyesh.newsappmvvm.databinding.LayoutItemTopNewsBinding
 import com.priyesh.newsappmvvm.ui.news.domain.model.Article
 import com.priyesh.newsappmvvm.utils.CommonFunctions
 
-class LatestNewsAdapter(private val onNewsClick: (Article) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LatestNewsAdapter(private val onNewsClick: (Article) -> Unit) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var articleList: List<Article>? = null
 
@@ -20,7 +21,12 @@ class LatestNewsAdapter(private val onNewsClick: (Article) -> Unit): RecyclerVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = DataBindingUtil.inflate<LayoutItemTopNewsBinding>(LayoutInflater.from(parent.context), R.layout.layout_item_top_news, parent, false)
+        val binding = DataBindingUtil.inflate<LayoutItemTopNewsBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.layout_item_top_news,
+            parent,
+            false
+        )
         return LatestNewsViewHolder(binding)
     }
 
@@ -32,11 +38,13 @@ class LatestNewsAdapter(private val onNewsClick: (Article) -> Unit): RecyclerVie
         articleList?.get(position)?.let { (holder as LatestNewsViewHolder).bindView(it) }
     }
 
-    inner class LatestNewsViewHolder(private val binding: LayoutItemTopNewsBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LatestNewsViewHolder(private val binding: LayoutItemTopNewsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindView(article: Article) {
             binding.topNewsImage.load(article.urlToImage)
             binding.title.text = article.title
-            val dateAndSource = "${CommonFunctions.convertISOToRequiredFormat(article.publishedAt)} | ${article.source?.name}"
+            val dateAndSource =
+                "${CommonFunctions.convertISOToRequiredFormat(article.publishedAt)} | ${article.source?.name}"
             binding.dateTimeSource.text = dateAndSource
             itemView.setOnClickListener {
                 onNewsClick.invoke(article)

@@ -15,7 +15,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RequestHandler @Inject constructor(val httpClient: HttpClient, val dispatcher: DispatcherProvider) {
+class RequestHandler @Inject constructor(
+    val httpClient: HttpClient,
+    val dispatcher: DispatcherProvider
+) {
 
     suspend inline fun <reified B, reified R> executeRequest(
         httpMethod: HttpMethod,
@@ -39,9 +42,17 @@ class RequestHandler @Inject constructor(val httpClient: HttpClient, val dispatc
             } catch (e: Exception) {
                 val networkResult = if (e is ResponseException) {
                     val errorBody = e.response.body<DefaultError>()
-                    when(e.response.status) {
-                        HttpStatusCode.Unauthorized -> NetworkException.UnauthorizedException(errorBody.message, e)
-                        HttpStatusCode.RequestTimeout -> NetworkException.SocketTimeoutException(errorBody.message, e)
+                    when (e.response.status) {
+                        HttpStatusCode.Unauthorized -> NetworkException.UnauthorizedException(
+                            errorBody.message,
+                            e
+                        )
+
+                        HttpStatusCode.RequestTimeout -> NetworkException.SocketTimeoutException(
+                            errorBody.message,
+                            e
+                        )
+
                         else -> NetworkException.NotFoundException(errorBody.message, e)
                     }
                 } else {

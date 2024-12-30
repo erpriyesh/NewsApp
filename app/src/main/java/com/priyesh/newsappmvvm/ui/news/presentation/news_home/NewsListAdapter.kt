@@ -10,7 +10,8 @@ import com.priyesh.newsappmvvm.databinding.LayoutItemNewsAdapterBinding
 import com.priyesh.newsappmvvm.ui.news.domain.model.Article
 import com.priyesh.newsappmvvm.utils.CommonFunctions
 
-class NewsListAdapter(private val onNewsClick: (Article) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsListAdapter(private val onNewsClick: (Article) -> Unit) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var articleList: List<Article>? = null
 
@@ -20,7 +21,12 @@ class NewsListAdapter(private val onNewsClick: (Article) -> Unit): RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = DataBindingUtil.inflate<LayoutItemNewsAdapterBinding>(LayoutInflater.from(parent.context), R.layout.layout_item_news_adapter, parent, false)
+        val binding = DataBindingUtil.inflate<LayoutItemNewsAdapterBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.layout_item_news_adapter,
+            parent,
+            false
+        )
         return LatestNewsViewHolder(binding)
     }
 
@@ -32,13 +38,15 @@ class NewsListAdapter(private val onNewsClick: (Article) -> Unit): RecyclerView.
         articleList?.get(position)?.let { (holder as LatestNewsViewHolder).bindView(it) }
     }
 
-    inner class LatestNewsViewHolder(private val binding: LayoutItemNewsAdapterBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LatestNewsViewHolder(private val binding: LayoutItemNewsAdapterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindView(article: Article) {
             binding.newsImage.load(article.urlToImage) {
 
             }
             binding.newsTitle.text = article.title
-            val dateAndSource = "${CommonFunctions.convertISOToRequiredFormat(article.publishedAt)} | ${article.source?.name}"
+            val dateAndSource =
+                "${CommonFunctions.convertISOToRequiredFormat(article.publishedAt)} | ${article.source?.name}"
             binding.newsDateTimeSource.text = dateAndSource
             binding.author.text = article.author
             itemView.setOnClickListener {

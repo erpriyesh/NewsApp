@@ -18,8 +18,13 @@ class NewsDetailsFragment : Fragment() {
     private var _binding: FragmentNewsDetailsBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news_details, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_news_details, container, false)
         return binding.root
     }
 
