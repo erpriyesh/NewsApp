@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.priyesh.newsappmvvm.R
 import com.priyesh.newsappmvvm.network.NetworkResult
+import com.priyesh.newsappmvvm.room.NewsDAO
 import com.priyesh.newsappmvvm.ui.news.domain.model.Article
 import com.priyesh.newsappmvvm.ui.news.domain.model.Category
 import com.priyesh.newsappmvvm.ui.news.domain.usecase.GetNewsUsecase
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     private val newsUsecase: GetNewsUsecase,
-    private val searchNewsUseCase: SearchNewsUseCase
+    private val searchNewsUseCase: SearchNewsUseCase,
+    private val newsDAO: NewsDAO
 ) : ViewModel() {
 
     private val _news = MutableLiveData<List<Article>>()
@@ -34,14 +36,18 @@ class NewsViewModel @Inject constructor(
     fun loadNews(category: String? = null) {
         viewModelScope.launch {
             when (val response = newsUsecase(category)) {
-                is NetworkResult.SUCCESS -> _news.value =
-                    response.data.articles?.filter { it.title?.contains("Removed", true) != true }
-                        ?: emptyList()
+                is NetworkResult.SUCCESS -> {
+                    val articles = response.data.articles?.filter { !it.title.contains("Removed", true) }
+                    if (!articles.isNullOrEmpty()) {
+                        newsDAO.insertArticle(articles)
+                    }
+                    _news.value = newsDAO.getArticles()
+                }
 
-                is NetworkResult.FAILURE -> Log.e(
-                    "NewsViewModel",
-                    response.exception.message.toString()
-                )
+                is NetworkResult.FAILURE -> {
+                    Log.e("NewsViewModel", response.exception.message.toString())
+                    _news.value = newsDAO.getArticles()
+                }
             }
         }
     }

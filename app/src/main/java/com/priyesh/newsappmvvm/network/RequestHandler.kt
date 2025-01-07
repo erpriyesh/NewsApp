@@ -20,6 +20,11 @@ class RequestHandler @Inject constructor(
     val dispatcher: DispatcherProvider
 ) {
 
+    init {
+        httpClient.addRequestInterceptor()
+        httpClient.addResponseInterceptor()
+    }
+
     suspend inline fun <reified B, reified R> executeRequest(
         httpMethod: HttpMethod,
         urlPathSegments: List<Any>,

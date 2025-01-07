@@ -64,6 +64,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.recyclerview)
     implementation(libs.coil)
+    implementation(libs.paging3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

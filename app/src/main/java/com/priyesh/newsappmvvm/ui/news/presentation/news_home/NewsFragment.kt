@@ -56,8 +56,10 @@ class NewsFragment : Fragment() {
 
     private fun initObservers() {
         viewModel.news.observe(viewLifecycleOwner) {
-            latestNewsAdapter.submitList(listOf(it[0]))
-            newsListAdapter.submitList(it.subList(1, it.size))
+            if (!it.isNullOrEmpty()) {
+                latestNewsAdapter.submitList(listOf(it[0]))
+                newsListAdapter.submitList(it.subList(1, it.size))
+            }
         }
     }
 
