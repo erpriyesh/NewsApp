@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.priyesh.newsappmvvm.R
 import com.priyesh.newsappmvvm.databinding.LayoutItemCategoryAdapterBinding
-import com.priyesh.newsappmvvm.ui.news.domain.model.Category
+import com.priyesh.newsappmvvm.ui.news.data.model.Category
 
 class NewsCategoryAdapter(private val onCategorySelected: (Category) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

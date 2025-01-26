@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_color"
-        tools:context=".ui.news.presentation.SearchNewsFragment">
+        tools:context=".ui.news.presentation.search_news.SearchNewsFragment">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -39,5 +39,12 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:listitem="@layout/layout_item_news_adapter" />
 
+        <include
+            android:id="@+id/loadOrError"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/layout_no_result_found"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

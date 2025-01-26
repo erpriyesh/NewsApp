@@ -1,4 +1,4 @@
-package com.priyesh.newsappmvvm.ui.news.presentation
+package com.priyesh.newsappmvvm.ui.news.presentation.favourite_news
 
 import android.os.Bundle
 import android.view.LayoutInflater

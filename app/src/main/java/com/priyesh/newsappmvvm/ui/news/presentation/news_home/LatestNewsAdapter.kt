@@ -41,10 +41,10 @@ class LatestNewsAdapter(private val onNewsClick: (Article) -> Unit) :
     inner class LatestNewsViewHolder(private val binding: LayoutItemTopNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(article: Article) {
-            binding.topNewsImage.load(article.urlToImage)
+            binding.topNewsImage.load(article.thumbnail)
             binding.title.text = article.title
             val dateAndSource =
-                "${CommonFunctions.convertISOToRequiredFormat(article.publishedAt)} | ${article.source?.name}"
+                "${CommonFunctions.convertISOToRequiredFormat(article.publishedAt)} | ${article.source}"
             binding.dateTimeSource.text = dateAndSource
             itemView.setOnClickListener {
                 onNewsClick.invoke(article)

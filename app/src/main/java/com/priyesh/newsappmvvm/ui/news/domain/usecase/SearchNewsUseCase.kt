@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class SearchNewsUseCase @Inject constructor(private val repository: NewsRepository) {
-    suspend operator fun invoke(query: String, page: Int = 1) = repository.searchNews(query, page)
+    operator fun invoke(query: String, page: Int = 1) = repository.getSearchedNews(query)
 }

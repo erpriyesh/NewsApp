@@ -1,9 +1,9 @@
 package com.priyesh.newsappmvvm.ui.news.domain.repository
 
-import com.priyesh.newsappmvvm.network.NetworkResult
-import com.priyesh.newsappmvvm.ui.news.domain.model.NewsResponse
+import androidx.paging.Pager
+import com.priyesh.newsappmvvm.ui.news.domain.model.Article
 
 interface NewsRepository {
-    suspend fun getTopHeadlines(category: String?): NetworkResult<NewsResponse>
-    suspend fun searchNews(query: String, page: Int): NetworkResult<NewsResponse>
+    fun getPagedTopHeadlines(category: String?): Pager<Int, Article>
+    fun getSearchedNews(query: String): Pager<Int, Article>
 }

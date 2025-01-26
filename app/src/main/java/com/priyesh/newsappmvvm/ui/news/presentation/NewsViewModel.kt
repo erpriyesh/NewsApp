@@ -1,54 +1,37 @@
 package com.priyesh.newsappmvvm.ui.news.presentation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.filter
+import androidx.paging.liveData
 import com.priyesh.newsappmvvm.R
-import com.priyesh.newsappmvvm.network.NetworkResult
-import com.priyesh.newsappmvvm.room.NewsDAO
+import com.priyesh.newsappmvvm.ui.news.data.model.Category
 import com.priyesh.newsappmvvm.ui.news.domain.model.Article
-import com.priyesh.newsappmvvm.ui.news.domain.model.Category
 import com.priyesh.newsappmvvm.ui.news.domain.usecase.GetNewsUsecase
 import com.priyesh.newsappmvvm.ui.news.domain.usecase.SearchNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     private val newsUsecase: GetNewsUsecase,
     private val searchNewsUseCase: SearchNewsUseCase,
-    private val newsDAO: NewsDAO
 ) : ViewModel() {
 
-    private val _news = MutableLiveData<List<Article>>()
-    val news: LiveData<List<Article>> = _news
+    private val _news = MutableLiveData<PagingData<Article>>()
+    val news: LiveData<PagingData<Article>> = _news
 
-    private val _searchedNews = MutableLiveData<List<Article>>()
-    val searchedNews: LiveData<List<Article>> = _searchedNews
-
-    init {
-        loadNews()
-    }
+    private val _searchedNews = MutableLiveData<PagingData<Article>>()
+    val searchedNews: LiveData<PagingData<Article>> = _searchedNews
 
     fun loadNews(category: String? = null) {
-        viewModelScope.launch {
-            when (val response = newsUsecase(category)) {
-                is NetworkResult.SUCCESS -> {
-                    val articles = response.data.articles?.filter { !it.title.contains("Removed", true) }
-                    if (!articles.isNullOrEmpty()) {
-                        newsDAO.insertArticle(articles)
-                    }
-                    _news.value = newsDAO.getArticles()
-                }
-
-                is NetworkResult.FAILURE -> {
-                    Log.e("NewsViewModel", response.exception.message.toString())
-                    _news.value = newsDAO.getArticles()
-                }
-            }
+        val pagingLiveData = newsUsecase.invoke(category).liveData.cachedIn(viewModelScope)
+        pagingLiveData.observeForever { pagingData ->
+            _news.postValue(pagingData.filter { !it.title.contains("Removed", true) })
         }
     }
 
@@ -64,19 +47,10 @@ class NewsViewModel @Inject constructor(
         )
     }
 
-    fun searchNews(query: String, page: Int = 1): LiveData<List<Article>> {
-        viewModelScope.launch {
-            when (val response = searchNewsUseCase(query, page)) {
-                is NetworkResult.FAILURE -> Log.e(
-                    "NewsViewModel",
-                    response.exception.message.toString()
-                )
-
-                is NetworkResult.SUCCESS -> _searchedNews.value =
-                    response.data.articles?.filter { it.title?.contains("Removed", true) != true }
-                        ?: emptyList()
-            }
+    fun getSearchedNews(query: String) {
+        val pagingLiveData = searchNewsUseCase.invoke(query).liveData.cachedIn(viewModelScope)
+        pagingLiveData.observeForever { pagingData ->
+            _searchedNews.postValue(pagingData.filter { !it.title.contains("Removed", true) })
         }
-        return searchedNews
     }
 }
